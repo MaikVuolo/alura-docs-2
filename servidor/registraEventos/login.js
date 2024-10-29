@@ -10,12 +10,9 @@ function registraEventosLogin (socket, io){
       const autenticar = autenticarUsuario(senha, usuarioEncontrado);
       
       if(autenticar){
-        const tokenJWT = gerarToken({usuario})
+        const tokenJwt = gerarToken({usuario})
 
-        console.log(tokenJWT);
-        
-
-        socket.emit("cadastro_autenticado_sucesso", tokenJWT);
+        socket.emit("cadastro_autenticado_sucesso", tokenJwt);
       }else{
         socket.emit("falha_autenticacao");
       }

@@ -10,10 +10,24 @@ const nomeDocumento = parametros.get("nome");
 const textoEditor = document.getElementById("editor-texto");
 const tituloDocumento = document.getElementById("titulo-documento");
 const botaoExcluir = document.getElementById("excluir-documento");
+const usuariosConectados = document.getElementById("usuarios-conectados");
 
 tituloDocumento.textContent = nomeDocumento || "Documento sem título";
 
-selecionarDocumento(nomeDocumento);
+function tratarAutorizacaoSucesso(payload){
+  selecionarDocumento({nomeDocumento, nomeUsuario : payload.usuario});
+
+}
+  
+function atualizarInterfaceDocumento(nomeUsuario){
+  usuariosConectados.innerHTML = ""
+
+ nomeUsuario.forEach(usuario => {
+   
+ usuariosConectados.innerHTML += `
+ <li class="list-group-item">${usuario} 1</li>
+ `
+});}
 
 textoEditor.addEventListener("keyup", () => {
   emitirTextoEditor({
@@ -37,4 +51,4 @@ function alertarERedirecionar(nome) {
   }
 }
 
-export { atualizaTextoEditor, alertarERedirecionar };
+export { atualizaTextoEditor, alertarERedirecionar, tratarAutorizacaoSucesso, atualizarInterfaceDocumento };
